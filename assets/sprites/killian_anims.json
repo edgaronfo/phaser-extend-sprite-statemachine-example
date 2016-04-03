@@ -1,0 +1,156 @@
+{
+	"name": "killian",
+	"type": "atlas",
+	"texture_file": "assets/sprites/killian.png",
+	"data_file": "assets/sprites/killian.json",
+	"animations": [
+		{
+			"name": "sitting",
+			"frames": [21,22,23,24,25,26],
+			"frameRate": 35,
+			"loop": true,
+			"type": "state",
+			"events":[
+				{
+					"name": "enter",
+					"predicate": "function(){ }"
+				},
+				{
+					"name": "update",
+					"predicate": "function(){ }"
+				},
+				{
+					"name": "exit",
+					"predicate": "function(){ }"
+				}
+			]
+		},
+		{
+			"name": "walking",
+			"frames": [1,2,3,4,5,6,7,8,9,10,11,12],
+			"frameRate": 30,
+			"loop": true,
+			"type": "state",
+			"events":[
+				{
+					"name": "enter",
+					"predicate": "function(){ }"
+				},
+				{
+					"name": "update",
+					"predicate": "function(){ }"
+				},
+				{
+					"name": "exit",
+					"predicate": "function(){ }"
+				}
+			]
+		},
+		{
+			"name": "laying",
+			"frames": [97,98,99,98],
+			"frameRate": 10,
+			"loop": true,
+			"type": "state",
+			"events":[
+				{
+					"name": "enter",
+					"predicate": "function(){ }"
+				},
+				{
+					"name": "update",
+					"predicate": "function(){ }"
+				},
+				{
+					"name": "exit",
+					"predicate": "function(){ }"
+				}
+			]
+		},
+		{
+			"name": "sleeping",
+			"frames": [113,114,115,116,117,118,119,120,121,121,121,121,121,121,121,121,121,121,121,120,119,118,117,116,115,114,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113,113],
+			"frameRate": 10,
+			"loop": true,
+			"type": "state",
+			"events":[
+				{
+					"name": "enter",
+					"predicate": "function(){ }"
+				},
+				{
+					"name": "update",
+					"predicate": "function(){ }"
+				},
+				{
+					"name": "exit",
+					"predicate": "function(){ }"
+				}
+			]
+		},
+	{
+		"name": "walking_to_sitting",
+		"frames": [13,14,15,16,17,18,19],
+		"frameRate": 40,
+		"loop": false,
+		"type": "transition",
+		"from": "walking",
+		"to": "sitting",
+		"predicate": "function(){ return ( !game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) ); }"
+	},
+	{
+		"name": "sitting_to_walking",
+		"frames": [19,18,17,16,15,14,13],
+		"frameRate": 40,
+		"loop": false,
+		"type": "transition",
+		"from": "sitting",
+		"to": "walking",
+		"predicate": "function(){ return ( game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) ); }"
+	},
+	{
+		"name": "sitting_to_laying",
+		"frames": [88,89,90,91,92,93,94,95,97,97,97,97],
+		"frameRate": 40,
+		"loop": false,
+		"type": "transition",
+		"from": "sitting",
+		"to": "laying",
+		"predicate": "function(){ return ( new Date() - self.sm.timer > 1000 ); }"
+	},
+	{
+		"name": "laying_to_sitting",
+		"frames": [95,94,93,92,91,90,89,88,87,87,87,87,87,87,87],
+		"frameRate": 40,
+		"loop": false,
+		"type": "transition",
+		"from": "laying",
+		"to": "sitting",
+		"predicate": "function(){ return ( game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) ); }"
+	},
+	{
+		"name": "laying_to_sleeping",
+		"frames": [102,103,104,105,106,107,108,109,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110,110],
+		"frameRate": 40,
+		"loop": false,
+		"type": "transition",
+		"from": "laying",
+		"to": "sleeping",
+		"predicate": "function(){ return ( new Date() - self.sm.timer > 1000 ); }"
+	},
+	{
+		"name": "sleeping_to_laying",
+		"frames": [113,110,109,108,107,106,105,104,103,102,100,99,98,97,97,97,97,97,97,97],
+		"frameRate": 40,
+		"loop": false,
+		"type": "transition",
+		"from": "sleeping",
+		"to": "laying",
+		"predicate": "function(){ return ( game.input.keyboard.isDown(Phaser.Keyboard.RIGHT) ); }"
+	}
+],
+
+"meta": {
+}
+
+}
