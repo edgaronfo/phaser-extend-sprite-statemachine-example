@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>Killian - Phaser Demo</title>
-		<script src="http://cdn.jsdelivr.net/phaser/2.4.3/phaser.min.js"></script>
-		<script src="Killian.js"></script>
+		<script src="phaser.js"></script>
+		<script src="AnimatedEntity.js"></script>
 		<script src="stateMachine.js"></script>
 	</head>
 	<body>
@@ -16,23 +16,44 @@
 
  			window.onload = function() {
 
+                		// global objects
 				var game = new Phaser.Game(320, 240, Phaser.AUTO, '', { preload: preload, create: create, update: update });
 				var killian;
 
+                		// game.preload
 				function preload () {
 				  game.stage.backgroundColor = 0xFFFFFF;
 				  game.load.atlas('killian', 'assets/sprites/killian.png', 'assets/sprites/killian.json',Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+				  // the following file contains all the data for the animations
+				  // and the states and transitions for the entity's state machine
+				  game.load.text('killian_data', 'assets/sprites/killian_anims.json');
+				  // NOTE:
+				  // this file also contains the sprite atlas data used (above) in 'game.load.atlas(...)'
+				  // so we could parametrize completely the loading of assets for this entity
+				  // but for the simplicity of this example we will not implement it
 				}
 
+                		// game.create
 				function create () {
-				  killian = new Killian( game, -50, -100 );
+				  // turn the text retrieved from the json file into a js object which we can use properly
+				  var animations_text, animations_data;
+				  animations_text = game.cache.getText('killian_data');
+				  animations_data = JSON.parse(animations_text);
+				  
+				  // to load the atlas solely from data from the configuration file, we would use:
+				  // game.load.atlas(animations_data.name, animations_data.texture_file, animations_data.data_file, Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
+
+				  // create our animated entity
+				  killian = new AnimatedEntity( game, -50, -100, animations_data );
 				}
 
+                		// game.update
 				function update(){
 				  document.getElementById('state').innerHTML = "<b>state:</b> " + killian.sm.currentState;
 				}
 		
- 		}
+ 		} // end window.onload
+		
 		</script>
 	</body>
 </html>
