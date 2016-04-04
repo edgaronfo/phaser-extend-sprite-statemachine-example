@@ -6,6 +6,7 @@
 // modified from https://github.com/aroth/phaser-extend-sprite-statemachine-example
 
 AnimatedEntity = function (game, x, y, anim_data) {
+  // id of the sprite atlas this entity will use
   this.atlas_name = anim_data.name;
 
   // ---------------------------------------------------
@@ -22,7 +23,7 @@ AnimatedEntity = function (game, x, y, anim_data) {
   // ---------------------------------------------------
   // Create Animations, States & Transitions
   // ---------------------------------------------------
-    anim_data.animations.forEach(function (animation) {
+  anim_data.animations.forEach(function (animation) {
     // Loop through all the animations contained in the data retrieved from file at 'game.preload'
     // We must make sure to define in the file all the states first and then all the transitions
 
