@@ -9,7 +9,7 @@ AnimatedEntity = function (game, x, y, anim_data) {
   // id of the sprite atlas this entity will use
   this.atlas_name = anim_data.name;
 
-  // Constructor
+  // Sprite Constructor
   Phaser.Sprite.call(this, game, x, y, this.atlas_name);
 
   // State Machine
