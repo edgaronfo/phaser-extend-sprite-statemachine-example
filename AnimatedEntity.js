@@ -16,48 +16,45 @@ AnimatedEntity = function (game, x, y, anim_data) {
   // ---------------------------------------------------
   // State Machine
   // ---------------------------------------------------
-
   this.sm = new StateMachine( this, { debug: false } );
   var self = this;
   
   // ---------------------------------------------------
   // Create Animations, States & Transitions
   // ---------------------------------------------------
-  
-  // Loop through all the animations contained in the data retrieved from file at 'game.preload'
-  // We must make sure to define in the file all the states first and then all the transitions
-  anim_data.animations.forEach(function (animation) {
+    anim_data.animations.forEach(function (animation) {
+    // Loop through all the animations contained in the data retrieved from file at 'game.preload'
+    // We must make sure to define in the file all the states first and then all the transitions
 
       // ---------------------------------------------------
       // Animations
       // ---------------------------------------------------
-	  this.animations.add(animation.name, animation.frames, animation.frameRate, animation.loop);
+      this.animations.add(animation.name, animation.frames, animation.frameRate, animation.loop);
 
       // ---------------------------------------------------
       // State Machine States
       // ---------------------------------------------------
-	  if (animation.type == "state")
-	  {
-		  var state_events = {}
-		  animation.events.forEach(function (event) {
-			  // turn the string in the file into runnable code
-			  eval("var func = " + event.predicate + ";");
-			  state_events[event.name] = func;
-		  }, this);
-		  this.sm.state(animation.name, state_events);   
-	  } // end if state
+      if (animation.type == "state")
+      {
+	  var state_events = {}
+	  animation.events.forEach(function (event) {
+	      // turn the string in the file into runnable code
+	      eval("var func = " + event.predicate + ";");
+	      state_events[event.name] = func;
+	  }, this);
+	  this.sm.state(animation.name, state_events);   
+      } // end if state
 
       // ---------------------------------------------------
       // State Machine Transitions
       // ---------------------------------------------------
-	  if (animation.type == "transition")
-	  {
-		  // turn the string in the file into runnable code
-		  eval("var func = " + animation.predicate + ";");
-		  this.sm.transition(animation.name, animation.from, animation.to, func);
-	  } // end if transition
+      if (animation.type == "transition")
+      {
+	  // turn the string in the file into runnable code
+	  eval("var func = " + animation.predicate + ";");
+	  this.sm.transition(animation.name, animation.from, animation.to, func);
+      } // end if transition
 
-  
   }, this); // end foreach animation
 
   // play the animation for the default initial state (the first state to be declared in the file)
