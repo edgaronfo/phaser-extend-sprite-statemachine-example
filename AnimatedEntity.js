@@ -24,8 +24,8 @@ AnimatedEntity = function (game, x, y, anim_data) {
   // Create Animations, States & Transitions
   // ---------------------------------------------------
   anim_data.animations.forEach(function (animation) {
-    // Loop through all the animations contained in the data retrieved from file at 'game.preload'
-    // We must make sure to define in the file all the states first and then all the transitions
+  // Loop through all the animations contained in the data retrieved from file at 'game.preload'
+  // We must make sure to define in the file all the states first and then all the transitions
 
       // ---------------------------------------------------
       // Animations
