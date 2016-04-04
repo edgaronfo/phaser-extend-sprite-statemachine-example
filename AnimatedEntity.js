@@ -9,32 +9,22 @@ AnimatedEntity = function (game, x, y, anim_data) {
   // id of the sprite atlas this entity will use
   this.atlas_name = anim_data.name;
 
-  // ---------------------------------------------------
   // Constructor
-  // ---------------------------------------------------
   Phaser.Sprite.call(this, game, x, y, this.atlas_name);
 
-  // ---------------------------------------------------
   // State Machine
-  // ---------------------------------------------------
   this.sm = new StateMachine( this, { debug: false } );
   var self = this;
   
-  // ---------------------------------------------------
   // Create Animations, States & Transitions
-  // ---------------------------------------------------
   anim_data.animations.forEach(function (animation) {
   // Loop through all the animations contained in the data retrieved from file at 'game.preload'
   // We must make sure to define in the file all the states first and then all the transitions
 
-      // ---------------------------------------------------
       // Animations
-      // ---------------------------------------------------
       this.animations.add(animation.name, animation.frames, animation.frameRate, animation.loop);
 
-      // ---------------------------------------------------
       // State Machine States
-      // ---------------------------------------------------
       if (animation.type == "state")
       {
 	  var state_events = {}
@@ -46,9 +36,7 @@ AnimatedEntity = function (game, x, y, anim_data) {
 	  this.sm.state(animation.name, state_events);   
       } // end if state
 
-      // ---------------------------------------------------
       // State Machine Transitions
-      // ---------------------------------------------------
       if (animation.type == "transition")
       {
 	  // turn the string in the file into runnable code
